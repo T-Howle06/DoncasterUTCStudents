@@ -56,7 +56,7 @@ namespace DoncasterUTCStudents
         {
             LoginCreationScreen loginCreationScreen = new LoginCreationScreen();
             loginCreationScreen.Show();
-            this.Hide();
+            this.Close();
         }
 
         private void loginButton_Click(object sender, RoutedEventArgs e)
@@ -67,6 +67,10 @@ namespace DoncasterUTCStudents
             if (SharedFunctions.validLogin(usernameTextBox, passwordPasswordBox, username, password) && validateLogin(username, password))
             {
                 MessageBox.Show("Valid login.", "Valid Login.", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                HomeScreen homeScreen = new HomeScreen();
+                homeScreen.Show();
+                this.Close();
             }
             else if (!validateLogin(username, password))
             {

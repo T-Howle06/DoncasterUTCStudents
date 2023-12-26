@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DoncasterUTCStudents"
         mc:Ignorable="d"
-        Title="LoginCreationScreen" Height="400" Width="600">
+        Title="Doncaster UTC Login Creation" Height="400" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <!-- Button rounded edges -->
         <Style TargetType="Button">

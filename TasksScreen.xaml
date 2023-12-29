@@ -6,7 +6,61 @@
         xmlns:local="clr-namespace:DoncasterUTCStudents"
         mc:Ignorable="d"
         Title="Doncaster UTC Tasks" Height="720" Width="1080" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <!-- Button rounded edges -->
+        <Style TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="White"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.ColumnSpan="2">
+            <Image Source="pack://application:,,,/DoncasterUTCStudents;component/resources/DUTClogo.png" HorizontalAlignment="Left" Margin="15" Stretch="None"/>
+            <TextBlock Text="Tasks" FontSize="60" Margin="20" VerticalAlignment="Center"/>
+        </StackPanel>
+
+        <Button x:Name="backButton" Content="Back" FontSize="36" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="20" Click="backButton_Click"/>
+
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Margin="20">
+            <ListView x:Name="tasksListView" SelectionMode="Single">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Task Name" DisplayMemberBinding="{Binding TaskName}" Width="520"/>
+                        <GridViewColumn Header="Due Date" DisplayMemberBinding="{Binding DueDate}" Width="520"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+            <Button x:Name="addNewTaskButton" Content="Add New Task" FontSize="34" Height="75" Width="225" Margin="20" Click="addNewTaskButton_Click"/>
+            <Button x:Name="editTaskButton" Content="Edit Task" FontSize="34" Height="75" Width="225" Margin="20" Click="editTaskButton_Click"/>
+            <Button x:Name="deleteTaskButton" Content="Delete Task" FontSize="34" Height="75" Width="225" Margin="20" Click="deleteTaskButton_Click"/>
+        </StackPanel>
     </Grid>
 </Window>

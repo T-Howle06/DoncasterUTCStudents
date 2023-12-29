@@ -52,6 +52,35 @@ namespace DoncasterUTCStudents
             
         }
 
+        private bool addToLog(string username)
+        {
+            DateTime dateTime = DateTime.Now;
+            string query = "INSERT INTO log (username, time) VALUES (@username, @time)";
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(SharedFunctions.connectionString))
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@username", username);
+                        command.Parameters.AddWithValue("@time", dateTime);
+
+                        int rowsAffected = command.ExecuteNonQuery();
+
+                        return rowsAffected > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}", "Login Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+        }
+
         private void createNewLoginLink_Click(object sender, EventArgs e)
         {
             LoginCreationScreen loginCreationScreen = new LoginCreationScreen();
@@ -67,6 +96,8 @@ namespace DoncasterUTCStudents
             if (SharedFunctions.validLogin(usernameTextBox, passwordPasswordBox, username, password) && validateLogin(username, password))
             {
                 MessageBox.Show("Valid login.", "Valid Login.", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                addToLog(username);
 
                 HomeScreen homeScreen = new HomeScreen();
                 homeScreen.Show();

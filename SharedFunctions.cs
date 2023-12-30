@@ -19,6 +19,12 @@ namespace DoncasterUTCStudents
             public DateTime? DueDate { get; set; }
         }
 
+        public class NoteItem
+        {
+            public string? NoteName { get; set; }
+            public string? Content { get; set; }
+        }
+
         public static string connectionString = "Data Source=DESKTOP-RVQ5B1D\\SQLEXPRESS;Initial Catalog=DoncasterUTC;Integrated Security=True;Encrypt=True;TrustServerCertificate=True;";
 
         public static string hashPassword(string password)
